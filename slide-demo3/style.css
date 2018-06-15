@@ -1,0 +1,30 @@
+.viewport{
+  width: 300px;
+  height: 200px;
+  border: 1px solid;
+  overflow: hidden;
+}
+
+.imgWrap{
+  position: relative;
+}
+.imgWrap > img{
+  top: 0;
+  width: 100%;
+  position: absolute;
+  transition: all 1s;
+}
+
+
+.imgWrap > img.current{
+  transform: translateX(0);
+  z-index:2;
+}
+.imgWrap > img.leave{
+  transform: translateX(-100%);
+  z-index:1;
+}
+.imgWrap > img.enter{
+  transform: translateX(100%);
+  z-index:1;
+}

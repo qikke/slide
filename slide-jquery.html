@@ -94,9 +94,8 @@
         <span></span>
         <span></span>
       </span>
-      <span class="btn pre">
-        <</span>
-          <span class="btn next">></span>
+      <span class="btn pre"></span>
+      <span class="btn next">></span>
     </div>
   </div>
 
@@ -135,12 +134,20 @@
             n = index
           })
         }
+
         //鼠标移入事件
-        $('#imgs').on('mouseenter', () => {
+        $('#imgs,.btn,#buttons>span').on('mouseenter', () => {
           clearInterval(timer)
         })
-        $('#imgs').on('mouseleave', () => {
+        $('#imgs,.btn,#buttons>span').on('mouseleave', () => {
           timer = setTimer()
+        })
+
+        $('.btn.pre').on('click', () => {
+          buttons.eq(--n % size).trigger('click')
+        })
+        $('.btn.next').on('click', () => {
+          buttons.eq(++n % size).trigger('click')
         })
       }
     }).call()

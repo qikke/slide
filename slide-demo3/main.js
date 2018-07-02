@@ -41,19 +41,31 @@ function Slide($slide) {
   this.size = $('.imgWrap > img').length
   this.n = 0
   this.$slide = $slide
+  this.timer = null
 
   this.init()
+  this.bindEvents()
 }
 
 Slide.prototype.init = function(){
   let _this = this
-  setInterval(() => {
+  this.timer = setInterval(() => {
     _this.makeLeave(_this.getImgNode(_this.n)).one('transitionend', (e) => {
       _this.makeEnter($(e.currentTarget))
     })
     _this.makeCurrent(_this.getImgNode(_this.n + 1))
     _this.n = _this.getValue(++_this.n)
   }, 3000)
+}
+
+Slide.prototype.bindEvents = function(){
+  $(document).on('visibilitychange',(e)=>{
+    if(document.hidden){
+      clearInterval(this.timer)
+    }else{
+      this.init()
+    }
+  })
 }
 
 Slide.prototype.getValue = function(x){
@@ -80,5 +92,5 @@ Slide.prototype.makeEnter = function($node) {
 
 
 ! function () {
-  let $slide = new Slide($('.slide'))
+  new Slide($('.slide'))
 }.call()
